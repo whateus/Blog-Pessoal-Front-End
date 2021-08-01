@@ -1,0 +1,90 @@
+<div class="container-fluid">
+
+    <div class="row bg-secondary d-flex align-items-center">
+        <div class="col-md-6">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 text-white">
+                    <h1 class="fs-54">Seja bem vindo(a)!</h1>
+                    <h5 class="fs-18">expresse aqui os seus pensamentos e opiniões!</h5>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center mt-3 mb-5">
+                <div class="col-md-6">
+                    <button class="btn btn-light me-2 text-secondary" data-bs-toggle="modal" data-bs-target="#novaPostagem">Nova Postagem</button>
+                    <a class="btn btn-outline-light text-light" href="#postagens">Ver Postagens</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="https://i.imgur.com/2OP3JCN.png" alt="" height="500px" width="500px">
+        </div>
+    </div>
+    
+</div>
+
+<div class="container mt-5 mb-5" id="postagens">
+    <nav>
+        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+          <button class="nav-link active text-secondary" id="nav-todasPostagens-tab" data-bs-toggle="tab" data-bs-target="#todasPostagens" type="button" role="tab" aria-controls="nav-todasPostagens" aria-selected="true">Todas as Postagens</button>
+
+          <button class="nav-link text-secondary" id="nav-minhasPostagens-tab" data-bs-toggle="tab" data-bs-target="#minhasPostagens" type="button" role="tab" aria-controls="nav-minhasPostagens" aria-selected="false">Minhas Postagens</button>
+
+          <button class="nav-link text-secondary font-weight-bold" id="nav-postagemTema-tab" data-bs-toggle="tab" data-bs-target="#postagemTema" type="button" role="tab" aria-controls="nav-postagemTema" aria-selected="false">Postagens por tema</button>
+
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="nav-todasPostagens-tab">Todas as postagens</div>
+
+        <div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="nav-minhasPostagens-tab">Minhas postagens</div>
+
+        <div class="tab-pane fade" id="postagemTema" role="tabpanel" aria-labelledby="nav-postagemTema-tab">Postagens por tema</div>
+
+      </div>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="novaPostagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Nova Postagem</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+              <label for="titulo">Título</label>
+              <input [(ngModel)]='postagem.titulo' type="text" class="form-control" id="titulo" placeholder="Digite o título">
+          </div>
+          <div class="form-group">
+            <label for="texto">Texto</label>
+            <textarea [(ngModel)]='postagem.texto' class="form-control" name="texto" id="texto" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="tema">Escolha um tema ou <a data-bs-dismiss="modal" routerLink='/tema'>cadastre um novo</a>: </label>
+            <select name="tema" id="tema" class="form-control" [(ngModel)]='idTema' (change)='findByIdTema()'>
+                <option *ngFor='let item of listaTemas' value="{{item.id}}">
+                  {{item.descricao}}
+                </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)='publicar()' data-bs-dismiss="modal">Publicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
